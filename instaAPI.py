@@ -13,12 +13,12 @@ client_id = '311da96cc1b7487a83a0fadb2dc6b464'
 client_secret = '4394245572c74f11aa0b2046974e9f65'
 access_token = '2071972233.311da96.836a5a01111d4c27949e639f30f94673'
 client_ip = urlopen('http://ip.42.pl/raw').read()
+api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
 def main():
+    popTest()
 
-    print client_ip
-    api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
-
+def tagSearch(sTag):
     all_media_ids = []
     media_ids,next = api.tag_recent_media(tag_name='like4like', count=100)
     temp,max_tag=next.split('max_tag_id=')
@@ -26,8 +26,8 @@ def main():
 
     for media_id in media_ids:
     		all_media_ids.append(media_id.id)
-    print all_media_ids
-    print len(all_media_ids)
+    #print all_media_ids
+    #print len(all_media_ids)
     counter = 1
 
     while next and counter < 5:
@@ -41,9 +41,15 @@ def main():
     #remove duplictes if any.
     all_media_ids=list(OrderedDict.fromkeys(all_media_ids))
 
-    print(all_media_ids)
+    #print(all_media_ids)
+    #print len(all_media_ids)
 
-    print len(all_media_ids)
+def popTest():
+    popshits = api.media_popular()
+    print len(popshits)
+
+    for m in popshits:
+        print(m)
 
 
 if __name__ == "__main__":
