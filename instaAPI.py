@@ -6,8 +6,8 @@ import sys
 import time
 from collections import OrderedDict
 
-user_id = ""
-user_token = ""
+user_id = "2071972233"
+user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c "
 
 #signed header stuff
 def main():
