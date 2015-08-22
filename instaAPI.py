@@ -40,3 +40,8 @@ def tag_search(sTag):
     	for media_id2 in more_media:
     		all_media_ids.append(media_id2.id)
     	counter+=1
+
+    #remove dublictes if any.
+    media_all_ids=list(OrderedDict.fromkeys(media_all_ids))
+
+    print len(media_all_ids)
