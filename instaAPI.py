@@ -20,7 +20,7 @@ def main():
     api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
     all_media_ids = []
-    media_ids,next = api.tag_recent_media(tag_name='like4like', count=1000)
+    media_ids,next = api.tag_recent_media(tag_name='like4like', count=80)
     temp,max_tag=next.split('max_tag_id=')
     max_tag=str(max_tag)
 
