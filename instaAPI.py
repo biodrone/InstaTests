@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+#TODO Search popular images for tags
+#TODO Find most popular tags
+
 from instagram.client import InstagramAPI
 from random import randint
 import sys
@@ -45,7 +48,7 @@ def tagSearch(sTag):
     #print len(all_media_ids)
 
 def popTest():
-    popshits = api.media_popular()
+    popshits = api.media_popular() #need to search this for tags
     print len(popshits)
 
     for m in popshits:
