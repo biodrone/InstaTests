@@ -5,6 +5,7 @@ from random import randint
 import sys
 import time
 from collections import OrderedDict
+from collections import counter #used to count tags eventually
 
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c "
@@ -26,16 +27,16 @@ def tag_search(sTag):
     return
 
 
-for media_id in media_ids:
-		all_media_ids.append(media_id.id)
-print all_media_ids
-print len(all_media_ids)
-counter = 1
+    for media_id in media_ids:
+    		all_media_ids.append(media_id.id)
+    print all_media_ids
+    print len(all_media_ids)
+    counter = 1
 
-while next and counter < 3:
-	more_media, next =api.tag_recent_media(tag_name='instadogs', max_tag_id=max_tag)
-	temp,max_tag=next.split('max_tag_id=')
-	max_tag=str(max_tag)
-	for media_id2 in more_media:
-		all_media_ids.append(media_id2.id)
-	counter+=1
+    while next and counter < 3:
+    	more_media, next =api.tag_recent_media(tag_name='instadogs', max_tag_id=max_tag)
+    	temp,max_tag=next.split('max_tag_id=')
+    	max_tag=str(max_tag)
+    	for media_id2 in more_media:
+    		all_media_ids.append(media_id2.id)
+    	counter+=1
