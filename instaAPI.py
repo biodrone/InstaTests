@@ -9,19 +9,15 @@ from collections import OrderedDict
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c "
 
-#signed header stuff
 def main():
     client_id = 'XXXXX'
     client_secret = 'XXXXX'
     access_token = 'XXXXXXX'
     client_ip = 'YOUR PUBLIC IP'
-    #api = InstagramAPI(client_id=client_id, client_secret=client_secret,client_ips= client_ip,access_token= access_token)
-    tag_search("instagood")
-    return
+    api = InstagramAPI(client_id=client_id, client_secret=client_secret,client_ips= client_ip,access_token= access_token)
 
-def tag_search(sTag):
     all_media_ids = []
-    media_ids,next = api.tag_recent_media(tag_name=sTag, count=80)
+    media_ids,next = api.tag_recent_media(tag_name="instagood", count=80)
     temp,max_tag=next.split('max_tag_id=')
     max_tag=str(max_tag)
     return
