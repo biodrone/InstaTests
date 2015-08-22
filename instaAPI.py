@@ -20,10 +20,9 @@ def main():
     api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
     all_media_ids = []
-    media_ids,next = api.tag_recent_media(tag_name='like4like', count=80)
+    media_ids,next = api.tag_recent_media(tag_name='like4like', count=100)
     temp,max_tag=next.split('max_tag_id=')
     max_tag=str(max_tag)
-
 
     for media_id in media_ids:
     		all_media_ids.append(media_id.id)
@@ -31,7 +30,7 @@ def main():
     print len(all_media_ids)
     counter = 1
 
-    while next and counter < 3:
+    while next and counter < 5:
     	more_media, next =api.tag_recent_media(tag_name='like4like', max_tag_id=max_tag)
     	temp,max_tag=next.split('max_tag_id=')
     	max_tag=str(max_tag)
@@ -41,6 +40,8 @@ def main():
 
     #remove duplictes if any.
     all_media_ids=list(OrderedDict.fromkeys(all_media_ids))
+
+    print(all_media_ids)
 
     print len(all_media_ids)
 
