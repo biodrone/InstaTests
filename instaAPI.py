@@ -15,7 +15,8 @@ def main():
     client_secret = 'XXXXX'
     access_token = 'XXXXXXX'
     client_ip = 'YOUR PUBLIC IP'
-    api = InstagramAPI(client_id=client_id, client_secret=client_secret,client_ips= client_ip,access_token= access_token)
+    #api = InstagramAPI(client_id=client_id, client_secret=client_secret,client_ips= client_ip,access_token= access_token)
+    tag_search("instagood")
     return
 
 def tag_search(sTag):
@@ -44,3 +45,7 @@ def tag_search(sTag):
     media_all_ids=list(OrderedDict.fromkeys(media_all_ids))
 
     print len(media_all_ids)
+
+
+if __name__ == "__main__":
+    main()
