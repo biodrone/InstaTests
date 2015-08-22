@@ -5,7 +5,6 @@ from random import randint
 import sys
 import time
 from collections import OrderedDict
-from collections import counter #used to count tags eventually
 
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c "
