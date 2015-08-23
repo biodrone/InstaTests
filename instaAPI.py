@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-#TODO Search popular images for tags
-#TODO Find most popular tags
+#TODO Search for other tags based on a single tag to find related tags
+#TODO Restrict search by language (geotag?) or filter out non english ones programmatically
 
 from instagram.client import InstagramAPI
 from random import randint
@@ -9,6 +9,8 @@ import sys
 import time
 from collections import OrderedDict
 from urllib2 import urlopen
+import pprint
+from sets import Set
 
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c"
@@ -19,33 +21,31 @@ client_ip = urlopen('http://ip.42.pl/raw').read()
 api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
 def main():
-    popTest()
+    tagSearch('like4like')
 
 def tagSearch(sTag):
-    all_media_ids = []
-    media_ids,next = api.tag_recent_media(tag_name='like4like', count=100)
-    temp,max_tag=next.split('max_tag_id=')
-    max_tag=str(max_tag)
+    tags = []
+    tag_search, next_tag = api.tag_search(q="like4like")
 
-    for media_id in media_ids:
-    		all_media_ids.append(media_id.id)
-    #print all_media_ids
-    #print len(all_media_ids)
-    counter = 1
 
-    while next and counter < 5:
-    	more_media, next =api.tag_recent_media(tag_name='like4like', max_tag_id=max_tag)
-    	temp,max_tag=next.split('max_tag_id=')
-    	max_tag=str(max_tag)
-    	for media_id2 in more_media:
-    		all_media_ids.append(media_id2.id)
-    	counter+=1
+    i = 0
+    while i < 5:
+        tag_recent_media, next = api.tag_recent_media(tag_name=tag_search[0].name)
+        for media in tag_recent_media:
+            #if hasattr(media, 'tags'):
+            for t in media.tags:
+                #temp = t.replace(" Tag: ", '', 1)
+                tags.append(str(t))  # attempt to get tags associated with each media
+        i += 1
 
-    #remove duplictes if any.
-    all_media_ids=list(OrderedDict.fromkeys(all_media_ids))
+    # stripped = Set([])
+    # for j in tags:
+    #     if j not in stripped:
+    #         stripped.add(j)
 
-    #print(all_media_ids)
-    #print len(all_media_ids)
+    print(tags)
+    print len(tags)
+    print len(set(tags))
 
 def popTest():
     popshits = api.media_popular() #need to search this for tags
@@ -54,6 +54,19 @@ def popTest():
     for m in popshits:
         print(m)
 
+    for media in popshits:
+        tags = []
+        poptags = []
+        for tag in media.tags:
+            tags.append(tag.name.lower())
+            if tag in poptags:
+                index = poptags.index(tag)
+
+            print(tag)
+
+    z = [[0 for _ in range(2)] for _ in range(2)]
+
+    pprint.pprint(z)
 
 if __name__ == "__main__":
     main()
