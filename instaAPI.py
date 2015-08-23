@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-#TODO Search for other tags based on a single tag to find related tags
 #TODO Restrict search by language (geotag?) or filter out non english ones programmatically
+#TODO Put tags and count in 2 different arrays to count how many of each tag there are
 
 from instagram.client import InstagramAPI
 from random import randint
@@ -11,6 +11,7 @@ from collections import OrderedDict
 from urllib2 import urlopen
 import pprint
 from sets import Set
+import numpy
 
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c"
@@ -22,20 +23,18 @@ api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=
 
 def main():
     tagSearch('like4like')
+    #arrTest()
 
 def tagSearch(sTag):
     tags = []
     tag_search, next_tag = api.tag_search(q="like4like")
 
-
     i = 0
     while i < 5:
         tag_recent_media, next = api.tag_recent_media(tag_name=tag_search[0].name)
         for media in tag_recent_media:
-            #if hasattr(media, 'tags'):
             for t in media.tags:
-                #temp = t.replace(" Tag: ", '', 1)
-                tags.append(str(t))  # attempt to get tags associated with each media
+                tags.append(str(t).replace("Tag: ", '', 1))  # attempt to get tags associated with each media
         i += 1
 
     # stripped = Set([])
