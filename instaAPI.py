@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 #TODO Restrict search by language (geotag?) or filter out non english ones programmatically
-#TODO Put tags and count in 2 different arrays to count how many of each tag there are
 
 from instagram.client import InstagramAPI
 from random import randint
