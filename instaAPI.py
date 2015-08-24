@@ -22,11 +22,8 @@ access_token = '2071972233.311da96.836a5a01111d4c27949e639f30f94673'
 client_ip = urlopen('http://ip.42.pl/raw').read()
 api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
-def main():
+#def main():
     #need to try catch for error 200 (not valid response, generally means network issue a.k.a. bt wifi not signed in)
-    tagSearch("like4like")
-    #tagSearch('animals')
-    #tagSearch('fashion')
 
 def tagSearch(sTag):
     tags = []
@@ -40,18 +37,27 @@ def tagSearch(sTag):
                 tags.append(str(t).replace("Tag: ", '', 1))
         i += 1
 
-    tagParse(Counter(tags).most_common(21))
+    return tagParse(Counter(tags).most_common(26))
 
 def tagParse(lstTags = []):
     popList = []
     finTags = []
+    strTags = ''
     i = 0
-    while i < 20:
+    while i < 25:
         popList.append(lstTags[(i + 1)])
         i += 1
     for x in popList:
         finTags.append("#" + x[0])
-    print(finTags)
+    # add in phtags
+    finTags.append('#phlikes')
+    finTags.append('#phtags')
+    finTags.append('#primehashtags')
+    #print(finTags)
+    for y in finTags:
+        strTags = strTags + y + ' '
+
+    return strTags
 def popTest():
     popshits = api.media_popular() #need to search this for tags
     print len(popshits)
@@ -73,5 +79,5 @@ def popTest():
 
     pprint.pprint(z)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
