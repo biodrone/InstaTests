@@ -38,8 +38,8 @@ def tagSearch(sTag):
         i += 1
 
     print Counter(tags)
-    print len(tags)
-    print len(set(tags))
+    print("Original size: " + len(tags))
+    print("Unique tags: " + len(set(tags)))
 
 def popTest():
     popshits = api.media_popular() #need to search this for tags
