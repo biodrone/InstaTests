@@ -11,7 +11,7 @@ from collections import OrderedDict
 from urllib2 import urlopen
 import pprint
 from sets import Set
-import numpy
+from collections import Counter
 
 user_id = "2071972233"
 user_token = "2071972233.ab103e5.04668cab8f264287b09e74030d24050c"
@@ -37,12 +37,7 @@ def tagSearch(sTag):
                 tags.append(str(t).replace("Tag: ", '', 1))  # attempt to get tags associated with each media
         i += 1
 
-    # stripped = Set([])
-    # for j in tags:
-    #     if j not in stripped:
-    #         stripped.add(j)
-
-    print(tags)
+    print Counter(tags)
     print len(tags)
     print len(set(tags))
 
