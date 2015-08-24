@@ -22,7 +22,8 @@ client_ip = urlopen('http://ip.42.pl/raw').read()
 api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=client_ip, access_token=access_token)
 
 def main():
-    tagSearch('like4like')
+    #need to try catch for error 200 (not valid response, generally means network issue a.k.a. bt wifi not signed in)
+    tagSearch("like4like")
     tagSearch('animals')
     tagSearch('fashion')
 
@@ -38,13 +39,18 @@ def tagSearch(sTag):
                 tags.append(str(t).replace("Tag: ", '', 1))
         i += 1
 
-    tagParse(Counter(tags))
+    tagParse(Counter(tags).most_common(21))
 
-def tagParse():
+def tagParse(lstTags = []):
+    #print len(lstTags)
+    popList = []
     i = 0
-    for i in lstTags:
-        
-
+    while i < 20:
+        popList.append(lstTags[i])
+        #print(lstTags[i])
+        i += 1
+    print(popList)
+    
 def popTest():
     popshits = api.media_popular() #need to search this for tags
     print len(popshits)
