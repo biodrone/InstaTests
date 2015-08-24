@@ -23,23 +23,27 @@ api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=
 
 def main():
     tagSearch('like4like')
-    #arrTest()
+    tagSearch('animals')
+    tagSearch('fashion')
 
 def tagSearch(sTag):
     tags = []
-    tag_search, next_tag = api.tag_search(q="like4like")
+    tag_search, next_tag = api.tag_search(q=sTag)
 
     i = 0
     while i < 5:
         tag_recent_media, next = api.tag_recent_media(tag_name=tag_search[0].name)
         for media in tag_recent_media:
             for t in media.tags:
-                tags.append(str(t).replace("Tag: ", '', 1))  # attempt to get tags associated with each media
+                tags.append(str(t).replace("Tag: ", '', 1))
         i += 1
 
-    print Counter(tags)
-    print("Original size: " + len(tags))
-    print("Unique tags: " + len(set(tags)))
+    tagParse(Counter(tags))
+
+def tagParse():
+    i = 0
+    for i in lstTags:
+        
 
 def popTest():
     popshits = api.media_popular() #need to search this for tags
