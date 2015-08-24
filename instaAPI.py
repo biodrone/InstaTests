@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 #TODO Restrict search by language (geotag?) or filter out non english ones programmatically
+#TODO Add some logic to warn of low API calls remaining
+#TODO Accept user input for a custom tag search
 
 from instagram.client import InstagramAPI
 from random import randint
