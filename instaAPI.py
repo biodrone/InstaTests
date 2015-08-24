@@ -46,7 +46,7 @@ def tagParse(lstTags = []):
     finTags = []
     i = 0
     while i < 20:
-        popList.append(lstTags[i])
+        popList.append(lstTags[(i + 1)])
         i += 1
     for x in popList:
         finTags.append("#" + x[0])
