@@ -24,8 +24,8 @@ api = InstagramAPI(client_id=client_id, client_secret=client_secret, client_ips=
 def main():
     #need to try catch for error 200 (not valid response, generally means network issue a.k.a. bt wifi not signed in)
     tagSearch("like4like")
-    tagSearch('animals')
-    tagSearch('fashion')
+    #tagSearch('animals')
+    #tagSearch('fashion')
 
 def tagSearch(sTag):
     tags = []
@@ -42,15 +42,15 @@ def tagSearch(sTag):
     tagParse(Counter(tags).most_common(21))
 
 def tagParse(lstTags = []):
-    #print len(lstTags)
     popList = []
+    finTags = []
     i = 0
     while i < 20:
         popList.append(lstTags[i])
-        #print(lstTags[i])
         i += 1
-    print(popList)
-    
+    for x in popList:
+        finTags.append("#" + x[0])
+    print(finTags)
 def popTest():
     popshits = api.media_popular() #need to search this for tags
     print len(popshits)
